@@ -41,9 +41,9 @@ Navigate to http://localhost:3000 to explore all available components.
 
 This section lists components implemented using the [Tailwind CSS](https://tailwindcss.com/) framework. Tailwind CSS is a utility-first CSS framework that provides a set of pre-defined classes to quickly build custom and responsive designs.
 
-| ID | Preview | Live Demo | Localhost |
+| ID | Preview | Localhost |
 |---|---|---|---|
-| 1 | ![Component 1](./assets/form-1.png) | [Live Demo](link-to-live-demo) | [Localhost](http://localhost:3000/tailwind-css/1) |
+| 1 | ![Component 1](./assets/form-1.png) | [Localhost](http://localhost:3000/tailwind-css/1) |
 
 ## 🤝 Contributing
 
