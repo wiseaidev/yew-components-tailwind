@@ -8,7 +8,7 @@ use crate::pages::login_page_one::TailwindCssLoginPageOne;
 pub enum Route {
     #[at("/error")]
     Error,
-    #[at("/")]
+    #[at("/tailwind-css/1")]
     TailwindCssLoginPageOne
 }
 
