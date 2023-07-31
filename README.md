@@ -20,13 +20,13 @@ This repository contains a collection of reusable components written in Rust for
 1. Fork/Clone the GitHub repository.
 
 	```bash
-	git clone https://github.com/wiseaidev/yew-components-tailwind 
+	git clone https://github.com/wiseaidev/yew-components-tailwind
 	```
 
 1. Navigate to the application directory.
 
 	```bash
-	cd yew-components
+	cd yew-components-tailwind
 	```
 
 1. Run the client:
