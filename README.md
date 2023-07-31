@@ -1,7 +1,5 @@
 # 📚 Yew Tailwind Components
 
-![rust.yml](https://img.shields.io/github/actions/workflow/status/wiseaidev/yew-components-tailwind /rust.yml)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/288da3e5-6115-4140-97b0-7dd0510aa0ce/deploy-status)](https://app.netlify.com/sites/yew-components/deploys)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/wiseaidev)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![made-with-rust](https://img.shields.io/badge/Made%20with-Rust-1f425f.svg?logo=rust&logoColor=white)](https://www.rust-lang.org/)
