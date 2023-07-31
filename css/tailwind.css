@@ -4,7 +4,3 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
-
-html {
-    font-family: 'Roboto', sans-serif;
-}
