@@ -43,7 +43,8 @@ This section lists components implemented using the [Tailwind CSS](https://tailw
 
 | ID | Preview | Localhost |
 |---|---|---|
-| 1 | ![Component 1](./assets/form-1.png) | [Localhost](http://localhost:3000/tailwind-css/1) |
+| 1 | ![Component 1](./assets/form-one.png) | [Localhost](http://localhost:3000/tailwind-css/1) |
+| 2 | ![Component 2](./assets/form-two.png) | [Localhost](http://localhost:3000/tailwind-css/2) |
 
 ## 🤝 Contributing
 
