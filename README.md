@@ -41,14 +41,15 @@ Navigate to http://localhost:3000 to explore all available components.
 
 This section lists components implemented using the [Tailwind CSS](https://tailwindcss.com/) framework. Tailwind CSS is a utility-first CSS framework that provides a set of pre-defined classes to quickly build custom and responsive designs.
 
-| ID | Preview | Localhost |
-|---|---|---|
-| 1 | ![Component 1](./assets/form-one.png) | [Localhost](http://localhost:3000/tailwind-css/1) |
-| 2 | ![Component 2](./assets/form-two.png) | [Localhost](http://localhost:3000/tailwind-css/2) |
+| ID | Preview | Demo | Localhost |
+|---|---|---|---|
+| 1 | ![Component 1](./assets/form-one.png) | [![Netlify Status](https://api.netlify.com/api/v1/badges/68d1469e-05ee-4acd-9368-b67d9e53bc2e/deploy-status)](https://tailwind-login-form-1.netlify.app/) | [Localhost](http://localhost:3000/1) |
+| 2 | ![Component 2](./assets/form-two.png) | [![Netlify Status](https://api.netlify.com/api/v1/badges/68d1469e-05ee-4acd-9368-b67d9e53bc2e/deploy-status)](https://tailwind-login-form-2.netlify.app/) | [Localhost](http://localhost:3000/2) |
+| 3 | ![Component 3](./assets/form-three.png) | [![Netlify Status](https://api.netlify.com/api/v1/badges/68d1469e-05ee-4acd-9368-b67d9e53bc2e/deploy-status)](https://tailwind-login-form-3.netlify.app/) | [Localhost](http://localhost:3000/3) |
 
 ## 🤝 Contributing
 
-We welcome contributions to enhance the Rust Data Analysis repository! To contribute, please follow the [`CONTRIBUING.md`](CONTRIBUING.md) file guidelines. Thank you for helping make this project better!
+We welcome contributions to enhance the Yew Tailwind Components repository! To contribute, please follow the [`CONTRIBUTING.md`](CONTRIBUTING.md) file guidelines. Thank you for helping make this project better!
 
 ## 📜 License
 
