@@ -13,7 +13,7 @@ This repository contains a collection of reusable components written in Rust for
 
 ## 📖 Prologue
 
-[Yew](yew.rs) is a modern Rust framework for building multi-threaded front-end web applications. It aims to provide a productive and pleasant experience for developing front-end applications in Rust, leveraging its safety and performance benefits. By utilizing Yew, we can create interactive and efficient web applications with ease.
+[Yew](https://yew.rs/) is a modern Rust framework for building multi-threaded front-end web applications. It aims to provide a productive and pleasant experience for developing front-end applications in Rust, leveraging its safety and performance benefits. By utilizing Yew, we can create interactive and efficient web applications with ease.
 
 ## 🚀 Building and Running
 
