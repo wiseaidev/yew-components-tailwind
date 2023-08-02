@@ -41,11 +41,19 @@ Navigate to http://localhost:3000 to explore all available components.
 
 This section lists components implemented using the [Tailwind CSS](https://tailwindcss.com/) framework. Tailwind CSS is a utility-first CSS framework that provides a set of pre-defined classes to quickly build custom and responsive designs.
 
+### 🔐 Login Forms
+
 | ID | Preview | Demo | Localhost |
 |---|---|---|---|
-| 1 | ![Component 1](./assets/form-one.png) | [![Netlify Status](https://api.netlify.com/api/v1/badges/68d1469e-05ee-4acd-9368-b67d9e53bc2e/deploy-status)](https://tailwind-login-form-1.netlify.app/) | [Localhost](http://localhost:3000/1) |
-| 2 | ![Component 2](./assets/form-two.png) | [![Netlify Status](https://api.netlify.com/api/v1/badges/68d1469e-05ee-4acd-9368-b67d9e53bc2e/deploy-status)](https://tailwind-login-form-2.netlify.app/) | [Localhost](http://localhost:3000/2) |
-| 3 | ![Component 3](./assets/form-three.png) | [![Netlify Status](https://api.netlify.com/api/v1/badges/68d1469e-05ee-4acd-9368-b67d9e53bc2e/deploy-status)](https://tailwind-login-form-3.netlify.app/) | [Localhost](http://localhost:3000/3) |
+| 1 | ![Component 1](./assets/form-one.png) | [![Netlify Status](https://api.netlify.com/api/v1/badges/68d1469e-05ee-4acd-9368-b67d9e53bc2e/deploy-status)](https://tailwind-login-form-1.netlify.app/) | [Localhost](http://localhost:3000/login/1) |
+| 2 | ![Component 2](./assets/form-two.png) | [![Netlify Status](https://api.netlify.com/api/v1/badges/68d1469e-05ee-4acd-9368-b67d9e53bc2e/deploy-status)](https://tailwind-login-form-2.netlify.app/) | [Localhost](http://localhost:3000/login/2) |
+| 3 | ![Component 3](./assets/form-three.png) | [![Netlify Status](https://api.netlify.com/api/v1/badges/68d1469e-05ee-4acd-9368-b67d9e53bc2e/deploy-status)](https://tailwind-login-form-3.netlify.app/) | [Localhost](http://localhost:3000/login/3) |
+
+### 📬 Contact Forms
+
+| ID | Preview | Demo | Localhost |
+|---|---|---|---|
+| 1 | ![Component 1](./assets/contact-form-one.png) | [![Netlify Status](https://api.netlify.com/api/v1/badges/68d1469e-05ee-4acd-9368-b67d9e53bc2e/deploy-status)](https://tailwind-contact-form-1.netlify.app/) | [Localhost](http://localhost:3000/contact/1) |
 
 ## 🤝 Contributing
 
