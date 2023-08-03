@@ -55,6 +55,13 @@ This section lists components implemented using the [Tailwind CSS](https://tailw
 |---|---|---|---|
 | 1 | ![Component 1](./assets/contact-form-one.png) | [![Netlify Status](https://api.netlify.com/api/v1/badges/68d1469e-05ee-4acd-9368-b67d9e53bc2e/deploy-status)](https://tailwind-contact-form-1.netlify.app/) | [Localhost](http://localhost:3000/contact/1) |
 
+### 🔢 Multi-Steps Forms
+
+| ID | Preview | Demo | Localhost |
+|---|---|---|---|
+| 1 | ![Component 1](./assets/multi-step-form-one.png) | [![Netlify Status](https://api.netlify.com/api/v1/badges/68d1469e-05ee-4acd-9368-b67d9e53bc2e/deploy-status)](https://tailwind-multi-step-form-1.netlify.app/) | [Localhost](http://localhost:3000/multi-step/1) |
+
+
 ## 🤝 Contributing
 
 We welcome contributions to enhance the Yew Tailwind Components repository! To contribute, please follow the [`CONTRIBUTING.md`](CONTRIBUTING.md) file guidelines. Thank you for helping make this project better!
