@@ -1,10 +1,21 @@
 use serde::{Deserialize, Serialize};
 use wasm_bindgen_futures::spawn_local;
 use web_sys::{console, HtmlInputElement, Window};
+use input_yew::CustomInput;
 use yew::prelude::*;
 use regex::Regex;
 
 use crate::api::auth::login_user;
+
+
+fn validate_email(email: String) -> bool {
+    let pattern = Regex::new(r"^[^ ]+@[^ ]+\.[a-z]{2,3}$").unwrap();
+    pattern.is_match(&email)
+}
+
+fn validate_input(field: String) -> bool {
+    !&field.is_empty()
+}
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 struct LoginUserSchema {
@@ -45,55 +56,6 @@ pub fn contact_form_one() -> Html {
     let input_message_handle = use_state(String::default);
     let input_message= (*input_message_handle).clone();
 
-    let validate_email = |email: &str| {
-        let pattern = Regex::new(r"^[^ ]+@[^ ]+\.[a-z]{2,3}$").unwrap();
-        pattern.is_match(email)
-    };
-
-    let validate_input = |field: &str| !field.is_empty();
-
-    let on_email_change = {
-        let input_email_ref = input_email_ref.clone();
-
-        Callback::from(move |_| {
-            let input = input_email_ref.cast::<HtmlInputElement>();
-
-            if let Some(input) = input {
-                let value = input.value();
-                input_email_handle.set(value);
-                email_valid_handle.set(validate_email(&input.value()));
-            }
-        })
-    };
-
-    let on_name_change = {
-        let input_name_ref = input_name_ref.clone();
-
-        Callback::from(move |_| {
-            let input = input_name_ref.cast::<HtmlInputElement>();
-
-            if let Some(input) = input {
-                let value = input.value();
-                input_name_handle.set(value);
-                name_valid_handle.set(validate_input(&input.value()));
-            }
-        })
-    };
-
-    let on_subject_change = {
-        let input_subject_ref = input_subject_ref.clone();
-
-        Callback::from(move |_| {
-            let input = input_subject_ref.cast::<HtmlInputElement>();
-
-            if let Some(input) = input {
-                let value = input.value();
-                input_subject_handle.set(value);
-                subject_valid_handle.set(validate_input(&input.value()));
-            }
-        })
-    };
-
     let on_message_change = {
         let input_message_ref = input_message_ref.clone();
 
@@ -103,7 +65,7 @@ pub fn contact_form_one() -> Html {
             if let Some(input) = input {
                 let value = input.value();
                 input_message_handle.set(value);
-                message_valid_handle.set(validate_input(&input.value()));
+                message_valid_handle.set(validate_input(input.value()));
             }
         })
     };
@@ -172,57 +134,63 @@ pub fn contact_form_one() -> Html {
                 >
                   {"Contact US"}
                 </span>
-                <div class="wrap-input1 validate-input mb-6">
-                  <input
-                    type="text"
-                    class="w-full bg-gray-200 focus:bg-white border border-transparent rounded-lg px-4 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900"
-                    id="name"
-                    name="name"
-                    aria-required="true"
-                    placeholder="Your Name"
-                    required={true}
-                    ref={input_name_ref}
-                    oninput={on_name_change}
-                    aria-label="Your Name"
-                  />
-                </div>
-                if !name_valid {
-                    <div class="error-txt text-red-500 text-sm mb-2">{"Name can't be blank"}</div>
-                }
-                <div class="validate-input mb-6">
-                  <input
-                    type="text"
-                    class="input1 w-full bg-gray-200 focus:bg-white border border-transparent rounded-lg px-4 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900"
-                    id="email"
-                    name="email"
-                    aria-required="true"
-                    placeholder="Your Email"
-                    required={true}
-                    ref={input_email_ref}
-                    oninput={on_email_change}
-                    aria-label="Your Email"
-                  />
-                </div>
-                if !email_valid {
-                    <div class="error-txt text-red-500 text-sm mb-2">{"Enter a valid email address"}</div>
-                }
-                <div class="validate-input mb-6">
-                  <input
-                    type="text"
-                    class="input1 w-full bg-gray-200 focus:bg-white border border-transparent rounded-lg px-4 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900"
-                    id="subject"
-                    name="subject"
-                    aria-required="true"
-                    placeholder="Your Subject"
-                    required={true}
-                    ref={input_subject_ref}
-                    oninput={on_subject_change}
-                    aria-label="Your Subject"
-                  />
-                </div>
-                if !subject_valid {
-                    <div class="text-red-500 text-sm mb-2">{"Subject can't be blank"}</div>
-                }
+                <CustomInput
+                  input_type={Some("text".to_string())}
+                  label={"".to_string()}
+                  input_handle={input_name_handle}
+                  name={"name".to_string()}
+                  input_ref={input_name_ref}
+                  input_placeholder={"Your Name".to_string()}
+                  icon_class={"".to_string()}
+                  icon={"".to_string()}
+                  error_message={"Name can't be blank".to_string()}
+                  form_input_class={"".to_string()}
+                  form_input_field_class={"wrap-input1 validate-input mb-6".to_string()}
+                  form_input_label_class={"".to_string()}
+                  form_input_input_class={"w-full bg-gray-200 focus:bg-white border border-transparent rounded-lg px-4 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900".to_string()}
+                  form_input_error_class={"text-red-500 text-sm mb-2".to_string()}
+                  required={true}
+                  input_valid_handle={name_valid_handle}
+                  validate_function={validate_input}
+                />
+                <CustomInput
+                  input_type={Some("text".to_string())}
+                  label={"".to_string()}
+                  input_handle={input_email_handle}
+                  name={"email".to_string()}
+                  input_ref={input_email_ref}
+                  input_placeholder={"Your Email".to_string()}
+                  icon_class={"".to_string()}
+                  icon={"".to_string()}
+                  error_message={"Enter a valid email address".to_string()}
+                  form_input_class={"".to_string()}
+                  form_input_field_class={"wrap-input1 validate-input mb-6".to_string()}
+                  form_input_label_class={"".to_string()}
+                  form_input_input_class={"w-full bg-gray-200 focus:bg-white border border-transparent rounded-lg px-4 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900".to_string()}
+                  form_input_error_class={"text-red-500 text-sm mb-2".to_string()}
+                  required={true}
+                  input_valid_handle={email_valid_handle}
+                  validate_function={validate_email}
+                />
+                <CustomInput
+                  input_type={Some("text".to_string())}
+                  label={"".to_string()}
+                  input_handle={input_subject_handle}
+                  name={"subject".to_string()}
+                  input_ref={input_subject_ref}
+                  input_placeholder={"Your Subject".to_string()}
+                  icon_class={"".to_string()}
+                  icon={"".to_string()}
+                  error_message={"Subject can't be blank".to_string()}
+                  form_input_class={"".to_string()}
+                  form_input_field_class={"wrap-input1 validate-input mb-6".to_string()}
+                  form_input_label_class={"".to_string()}
+                  form_input_input_class={"w-full bg-gray-200 focus:bg-white border border-transparent rounded-lg px-4 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900".to_string()}
+                  form_input_error_class={"text-red-500 text-sm mb-2".to_string()}
+                  required={true}
+                  input_valid_handle={subject_valid_handle}
+                  validate_function={validate_input}
+                />
                 <div class="wrap-input1 validate-input mb-6">
                   <textarea
                     class="w-full bg-gray-200 focus:bg-white border border-transparent rounded-lg px-4 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900"
