@@ -1,27 +1,13 @@
 use serde::{Deserialize, Serialize};
 use wasm_bindgen_futures::spawn_local;
 use web_sys::{console, HtmlInputElement, Window};
+use crate::components::common::{validate_email, validate_input, LoginUserSchema};
 use input_yew::CustomInput;
 use yew::prelude::*;
 use regex::Regex;
 
 use crate::api::auth::login_user;
 
-
-fn validate_email(email: String) -> bool {
-    let pattern = Regex::new(r"^[^ ]+@[^ ]+\.[a-z]{2,3}$").unwrap();
-    pattern.is_match(&email)
-}
-
-fn validate_input(field: String) -> bool {
-    !&field.is_empty()
-}
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
-struct LoginUserSchema {
-    email: String,
-    password: String,
-}
 
 #[function_component(ContactFormOne)]
 pub fn contact_form_one() -> Html {
@@ -55,20 +41,6 @@ pub fn contact_form_one() -> Html {
     let input_message_ref = use_node_ref();
     let input_message_handle = use_state(String::default);
     let input_message= (*input_message_handle).clone();
-
-    let on_message_change = {
-        let input_message_ref = input_message_ref.clone();
-
-        Callback::from(move |_| {
-            let input = input_message_ref.cast::<HtmlInputElement>();
-
-            if let Some(input) = input {
-                let value = input.value();
-                input_message_handle.set(value);
-                message_valid_handle.set(validate_input(input.value()));
-            }
-        })
-    };
 
     let onsubmit = Callback::from(move |event: SubmitEvent| {
         event.prevent_default();
@@ -142,7 +114,6 @@ pub fn contact_form_one() -> Html {
                   input_ref={input_name_ref}
                   input_placeholder={"Your Name".to_string()}
                   icon_class={"".to_string()}
-                  icon={"".to_string()}
                   error_message={"Name can't be blank".to_string()}
                   form_input_class={"".to_string()}
                   form_input_field_class={"wrap-input1 validate-input mb-6".to_string()}
@@ -161,7 +132,6 @@ pub fn contact_form_one() -> Html {
                   input_ref={input_email_ref}
                   input_placeholder={"Your Email".to_string()}
                   icon_class={"".to_string()}
-                  icon={"".to_string()}
                   error_message={"Enter a valid email address".to_string()}
                   form_input_class={"".to_string()}
                   form_input_field_class={"wrap-input1 validate-input mb-6".to_string()}
@@ -180,7 +150,6 @@ pub fn contact_form_one() -> Html {
                   input_ref={input_subject_ref}
                   input_placeholder={"Your Subject".to_string()}
                   icon_class={"".to_string()}
-                  icon={"".to_string()}
                   error_message={"Subject can't be blank".to_string()}
                   form_input_class={"".to_string()}
                   form_input_field_class={"wrap-input1 validate-input mb-6".to_string()}
@@ -191,22 +160,24 @@ pub fn contact_form_one() -> Html {
                   input_valid_handle={subject_valid_handle}
                   validate_function={validate_input}
                 />
-                <div class="wrap-input1 validate-input mb-6">
-                  <textarea
-                    class="w-full bg-gray-200 focus:bg-white border border-transparent rounded-lg px-4 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900"
-                    id="message"
-                    name="message"
-                    aria-required="true"
-                    placeholder="Your Message"
-                    required={true}
-                    ref={input_message_ref}
-                    oninput={on_message_change}
-                    aria-label="Your Message"
-                  ></textarea>
-                </div>
-                if !message_valid {
-                    <div class="text-red-500 text-sm mb-2">{"Message can't be blank"}</div>
-                }
+                <CustomInput
+                  input_type={Some("textarea".to_string())}
+                  label={"".to_string()}
+                  input_handle={input_message_handle}
+                  name={"message".to_string()}
+                  input_ref={input_message_ref}
+                  input_placeholder={"Your Message".to_string()}
+                  icon_class={"".to_string()}
+                  error_message={"Message can't be blank".to_string()}
+                  form_input_class={"".to_string()}
+                  form_input_field_class={"wrap-input1 validate-input mb-6".to_string()}
+                  form_input_label_class={"".to_string()}
+                  form_input_input_class={"w-full bg-gray-200 focus:bg-white border border-transparent rounded-lg px-4 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900".to_string()}
+                  form_input_error_class={"text-red-500 text-sm mb-2".to_string()}
+                  required={true}
+                  input_valid_handle={message_valid_handle}
+                  validate_function={validate_input}
+                />
                 <div class="container-contact1-form-btn">
                   <button
                     class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg transition duration-300"

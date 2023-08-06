@@ -1,16 +1,11 @@
-use serde::{Deserialize, Serialize};
 use wasm_bindgen_futures::spawn_local;
 use web_sys::{console, HtmlInputElement, Window};
+use crate::components::common::{validate_email, validate_input, LoginUserSchema};
+use input_yew::CustomInput;
 use yew::prelude::*;
 use regex::Regex;
 
 use crate::api::auth::login_user;
-
-#[derive(Debug, Default, Clone, Serialize, Deserialize)]
-struct LoginUserSchema {
-    email: String,
-    password: String,
-}
 
 #[function_component(LoginFormOne)]
 pub fn login_form_one() -> Html {
@@ -20,14 +15,8 @@ pub fn login_form_one() -> Html {
     let email_valid_handle = use_state(|| true);
     let email_valid = (*email_valid_handle).clone();
 
-    let eye_active_handle = use_state(|| false);
-    let eye_active = (*eye_active_handle).clone();
-
     let password_valid_handle = use_state(|| true);
     let password_valid = (*password_valid_handle).clone();
-
-    let password_type_handle = use_state(|| "text");
-    let password_type = (*password_type_handle).clone();
 
     let input_email_ref = use_node_ref();
     let input_email_handle = use_state(String::default);
@@ -36,41 +25,6 @@ pub fn login_form_one() -> Html {
     let input_password_ref = use_node_ref();
     let input_password_handle = use_state(String::default);
     let input_password = (*input_password_handle).clone();
-
-    let validate_email = |email: &str| {
-        let pattern = Regex::new(r"^[^ ]+@[^ ]+\.[a-z]{2,3}$").unwrap();
-        pattern.is_match(email)
-    };
-
-    let validate_password = |password: &str| !password.is_empty();
-
-    let on_email_change = {
-        let input_email_ref = input_email_ref.clone();
-
-        Callback::from(move |_| {
-            let input = input_email_ref.cast::<HtmlInputElement>();
-
-            if let Some(input) = input {
-                let value = input.value();
-                input_email_handle.set(value);
-                email_valid_handle.set(validate_email(&input.value()));
-            }
-        })
-    };
-
-    let on_password_change = {
-        let input_password_ref = input_password_ref.clone();
-
-        Callback::from(move |_| {
-            let input = input_password_ref.cast::<HtmlInputElement>();
-
-            if let Some(input) = input {
-                let value = input.value();
-                input_password_handle.set(value);
-                password_valid_handle.set(validate_password(&input.value()));
-            }
-        })
-    };
 
     let onsubmit = Callback::from(move |event: SubmitEvent| {
         event.prevent_default();
@@ -104,17 +58,6 @@ pub fn login_form_one() -> Html {
         });
     });
 
-    let on_toggle_password = {
-        Callback::from(move |_| {
-            if eye_active {
-                password_type_handle.set("password".into())
-            }
-            else {
-                password_type_handle.set("text".into())
-            }
-            eye_active_handle.set(!eye_active);
-        })
-    };
 
     html! {
         <div
@@ -126,59 +69,44 @@ pub fn login_form_one() -> Html {
                 <div class="mb-3 error bg-red-600 text-white px-4 py-3 font-semibold rounded-md text-center text-base">{error}</div>
               }
               <span class="text-4xl text-gray-800 pb-6">{"Login"}</span>
-              <div>
-                <label for="username" class="text-base text-gray-800"
-                  >{"Username"}</label
-                >
-                <div class="relative mt-6">
-                  <i
-                    class="text-2xl fa fa-person text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2"
-                  ></i>
-                  <input
-                    id="username"
-                    class="input w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-100 pl-12"
-                    type="text"
-                    name="username"
-                    placeholder="Email"
-                    aria-required="true"
-                    required={true}
-                    ref={input_email_ref}
-                    oninput={on_email_change}
-                  />
-                </div>
-              </div>
-              if !email_valid {
-                  <div class="error-txt text-red-500 text-sm my-2">{"Enter a valid email address"}</div>
-              }
-              <div class="flex items-center justify-between">
-                <label for="password" class="text-base text-gray-800">{"Password"}</label>
-                <a href="#" class="text-base text-gray-900">{"Forgot?"}</a>
-              </div>
-              <div class="relative mt-1">
-                <i
-                  class="text-2xl fa fa-lock text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2"
-                ></i>
-                <input
-                  id="password"
-                  class="input w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-100 pl-12"
-                  type={&*password_type}
-                  required={true}
-                  name="password"
-                  aria-required="true"
-                      placeholder="Password"
-                  ref={input_password_ref}
-                  oninput={on_password_change}
-                />
-                <i
-                  class={format!("cursor-pointer absolute right-4 top-1/2 transform -translate-y-1/2 text-2xl text-gray-600 toggle-button fa {}", if eye_active { "fa-eye" } else { "fa-eye-slash " })}
-                  aria-hidden="true"
-                  role="presentation"
-                  onclick={on_toggle_password}
-                ></i>
-              </div>
-              if !password_valid {
-                 <div class="error-txt text-red-500 text-sm my-2">{"Password can't be blank"}</div>
-              }
+              <CustomInput
+                input_type={Some("text".to_string())}
+                label={"Email".to_string()}
+                input_handle={input_email_handle}
+                name={"username".to_string()}
+                input_ref={input_email_ref}
+                input_placeholder={"Your Email".to_string()}
+                icon_class={"text-2xl fa fa-person text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2".to_string()}
+                error_message={"Enter a valid email address!".to_string()}
+                form_input_class={"".to_string()}
+                form_input_field_class={"relative".to_string()}
+                form_input_label_class={"".to_string()}
+                form_input_input_class={"input w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-100 pl-12".to_string()}
+                form_input_error_class={"text-red-500 absolute text-sm mb-2".to_string()}
+                required={true}
+                input_valid_handle={email_valid_handle}
+                validate_function={validate_email}
+              />
+              <CustomInput
+                input_type={Some("password".to_string())}
+                label={"Password".to_string()}
+                input_handle={input_password_handle}
+                name={"password".to_string()}
+                input_ref={input_password_ref}
+                input_placeholder={"Password".to_string()}
+                icon_class={"text-2xl fa fa-lock text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2".to_string()}
+                error_message={"Password can't be blank!".to_string()}
+                form_input_class={"".to_string()}
+                form_input_field_class={"relative mt-2 mb-2".to_string()}
+                form_input_label_class={"".to_string()}
+                form_input_input_class={"input w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-100 pl-12".to_string()}
+                form_input_error_class={"text-red-500 absolute text-sm".to_string()}
+                required={true}
+                input_valid_handle={password_valid_handle}
+                validate_function={validate_input}
+                eye_active={"cursor-pointer absolute right-4 top-1/2 transform -translate-y-1/2 text-2xl text-gray-600 toggle-button fa fa-eye"}
+                eye_disabled={"cursor-pointer absolute right-4 top-1/2 transform -translate-y-1/2 text-2xl text-gray-600 toggle-button fa fa-eye-slash"}
+              />
               <div class="w-full">
                 <button
                   class="btn-social bg-indigo-600 hover:bg-indigo-700 text-white w-full py-3 rounded-lg text-base font-medium tracking-wide"

@@ -1,16 +1,7 @@
 use web_sys::HtmlInputElement;
 use input_yew::CustomInput;
+use crate::components::common::{validate_email, validate_input};
 use yew::prelude::*;
-use regex::Regex;
-
-fn validate_email(email: String) -> bool {
-    let pattern = Regex::new(r"^[^ ]+@[^ ]+\.[a-z]{2,3}$").unwrap();
-    pattern.is_match(&email)
-}
-
-fn validate_input(field: String) -> bool {
-    !&field.is_empty()
-}
 
 #[function_component(MultiStepFormOne)]
 pub fn multi_step_form_one() -> Html {
@@ -218,7 +209,6 @@ pub fn multi_step_form_one() -> Html {
                       input_ref={input_full_name_ref}
                       input_placeholder={"Full Name".to_string()}
                       icon_class={"".to_string()}
-                      icon={"".to_string()}
                       error_message={"Full name can't be blank!".to_string()}
                       form_input_class={"field mb-6".to_string()}
                       form_input_field_class={"validate-input mb-6".to_string()}
@@ -237,7 +227,6 @@ pub fn multi_step_form_one() -> Html {
                       input_ref={input_email_ref}
                       input_placeholder={"Email".to_string()}
                       icon_class={"".to_string()}
-                      icon={"".to_string()}
                       error_message={"Enter a valid email address!".to_string()}
                       form_input_class={"field mb-6".to_string()}
                       form_input_field_class={"validate-input mb-6".to_string()}
@@ -262,7 +251,6 @@ pub fn multi_step_form_one() -> Html {
                       input_ref={input_phone_number_ref}
                       input_placeholder={"Phone Number".to_string()}
                       icon_class={"".to_string()}
-                      icon={"".to_string()}
                       error_message={"Phone number can't be blank!".to_string()}
                       form_input_class={"field mb-6".to_string()}
                       form_input_field_class={"validate-input mb-6".to_string()}
@@ -281,7 +269,6 @@ pub fn multi_step_form_one() -> Html {
                       input_ref={input_address_ref}
                       input_placeholder={"Address".to_string()}
                       icon_class={"".to_string()}
-                      icon={"".to_string()}
                       error_message={"Address can't be blank!".to_string()}
                       form_input_class={"field mb-6".to_string()}
                       form_input_field_class={"validate-input mb-6".to_string()}
@@ -309,7 +296,6 @@ pub fn multi_step_form_one() -> Html {
                       input_ref={input_birthday_ref}
                       input_placeholder={"Birthday".to_string()}
                       icon_class={"".to_string()}
-                      icon={"".to_string()}
                       error_message={"Birthday can't be blank!".to_string()}
                       form_input_class={"field mb-6".to_string()}
                       form_input_field_class={"validate-input mb-6".to_string()}
@@ -358,7 +344,6 @@ pub fn multi_step_form_one() -> Html {
                       input_ref={input_username_ref}
                       input_placeholder={"Username".to_string()}
                       icon_class={"".to_string()}
-                      icon={"".to_string()}
                       error_message={"Username can't be blank!".to_string()}
                       form_input_class={"field mb-6".to_string()}
                       form_input_field_class={"validate-input mb-6".to_string()}
@@ -377,7 +362,6 @@ pub fn multi_step_form_one() -> Html {
                       input_ref={input_password_ref}
                       input_placeholder={"Password".to_string()}
                       icon_class={"".to_string()}
-                      icon={"".to_string()}
                       error_message={"Password can't be blank!".to_string()}
                       form_input_class={"field mb-6".to_string()}
                       form_input_field_class={"validate-input mb-6".to_string()}
