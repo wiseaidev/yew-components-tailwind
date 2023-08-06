@@ -433,9 +433,9 @@ dependencies = [
 
 [[package]]
 name = "input_yew"
-version = "0.1.0"
+version = "0.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "840cacef2b01ca2392c8febcf9f3bf9d372afeb9f3771284a02f442b2d57cca1"
+checksum = "e3c952d2f72efc663d96eecc11ee6e76e1af0968cb888ac128df52c358f2fb90"
 dependencies = [
  "web-sys",
  "yew",

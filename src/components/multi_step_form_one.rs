@@ -1,6 +1,16 @@
 use web_sys::HtmlInputElement;
+use input_yew::CustomInput;
 use yew::prelude::*;
 use regex::Regex;
+
+fn validate_email(email: String) -> bool {
+    let pattern = Regex::new(r"^[^ ]+@[^ ]+\.[a-z]{2,3}$").unwrap();
+    pattern.is_match(&email)
+}
+
+fn validate_input(field: String) -> bool {
+    !&field.is_empty()
+}
 
 #[function_component(MultiStepFormOne)]
 pub fn multi_step_form_one() -> Html {
@@ -8,53 +18,47 @@ pub fn multi_step_form_one() -> Html {
     let error_handle = use_state(String::default);
     let error = (*error_handle).clone();
 
-    let email_valid_handle = use_state(|| false);
+    let email_valid_handle = use_state(|| true);
     let email_valid = (*email_valid_handle).clone();
 
-    let full_name_valid_handle = use_state(|| false);
+    let full_name_valid_handle = use_state(|| true);
     let full_name_valid = (*full_name_valid_handle).clone();
 
-    let phone_number_valid_handle = use_state(|| false);
+    let phone_number_valid_handle = use_state(|| true);
     let phone_number_valid = (*phone_number_valid_handle).clone();
 
-    let address_valid_handle = use_state(|| false);
+    let address_valid_handle = use_state(|| true);
     let address_valid = (*address_valid_handle).clone();
 
-    let birthday_valid_handle = use_state(|| false);
+    let birthday_valid_handle = use_state(|| true);
     let birthday_valid = (*birthday_valid_handle).clone();
 
-    let gender_valid_handle = use_state(|| false);
+    let gender_valid_handle = use_state(|| true);
     let gender_valid = (*gender_valid_handle).clone();
 
-    let username_valid_handle = use_state(|| false);
+    let username_valid_handle = use_state(|| true);
     let username_valid = (*username_valid_handle).clone();
 
-    let password_valid_handle = use_state(|| false);
+    let password_valid_handle = use_state(|| true);
     let password_valid = (*password_valid_handle).clone();
 
     let input_email_ref = use_node_ref();
     let input_email_handle = use_state(String::default);
-    let input_email = (*input_email_handle).clone();
 
     let input_full_name_ref = use_node_ref();
     let input_full_name_handle = use_state(String::default);
-    let input_full_name = (*input_full_name_handle).clone();
 
     let input_subject_ref = use_node_ref();
     let input_subject_handle = use_state(String::default);
-    let input_subject = (*input_subject_handle).clone();
 
     let input_phone_number_ref = use_node_ref();
     let input_phone_number_handle = use_state(String::default);
-    let input_phone_number = (*input_phone_number_handle).clone();
 
     let input_address_ref = use_node_ref();
     let input_address_handle = use_state(String::default);
-    let input_address = (*input_address_handle).clone();
 
     let input_birthday_ref = use_node_ref();
     let input_birthday_handle = use_state(String::default);
-    let input_birthday_number = (*input_birthday_handle).clone();
 
     let input_gender_ref = use_node_ref();
     let input_gender_handle = use_state(String::default);
@@ -119,83 +123,6 @@ pub fn multi_step_form_one() -> Html {
         }
     };
 
-    let validate_email = |email: &str| {
-        let pattern = Regex::new(r"^[^ ]+@[^ ]+\.[a-z]{2,3}$").unwrap();
-        pattern.is_match(email)
-    };
-
-    let validate_input = |field: &str| !field.is_empty();
-
-    let on_email_change = {
-        let input_email_ref = input_email_ref.clone();
-
-        Callback::from(move |_| {
-            let input = input_email_ref.cast::<HtmlInputElement>();
-
-            if let Some(input) = input {
-                let value = input.value();
-                input_email_handle.set(value);
-                email_valid_handle.set(validate_email(&input.value()));
-            }
-        })
-    };
-
-    let on_full_name_change = {
-        let input_full_name_ref = input_full_name_ref.clone();
-
-        Callback::from(move |_| {
-            let input = input_full_name_ref.cast::<HtmlInputElement>();
-
-            if let Some(input) = input {
-                let value = input.value();
-                input_full_name_handle.set(value);
-                full_name_valid_handle.set(validate_input(&input.value()));
-            }
-        })
-    };
-
-    let on_phone_number_change = {
-        let input_phone_number_ref = input_phone_number_ref.clone();
-
-        Callback::from(move |_| {
-            let input = input_phone_number_ref.cast::<HtmlInputElement>();
-
-            if let Some(input) = input {
-                let value = input.value();
-                input_phone_number_handle.set(value);
-                phone_number_valid_handle.set(validate_input(&input.value()));
-            }
-        })
-    };
-
-    let on_address_change = {
-        let input_address_ref = input_address_ref.clone();
-
-        Callback::from(move |_| {
-            let input = input_address_ref.cast::<HtmlInputElement>();
-
-            if let Some(input) = input {
-                let value = input.value();
-                input_address_handle.set(value);
-                address_valid_handle.set(validate_input(&input.value()));
-            }
-        })
-    };
-
-    let on_birthday_change = {
-        let input_birthday_ref = input_birthday_ref.clone();
-
-        Callback::from(move |_| {
-            let input = input_birthday_ref.cast::<HtmlInputElement>();
-
-            if let Some(input) = input {
-                let value = input.value();
-                input_birthday_handle.set(value);
-                birthday_valid_handle.set(validate_input(&input.value()));
-            }
-        })
-    };
-
     let on_gender_change = {
         let input_gender_ref = input_gender_ref.clone();
 
@@ -205,35 +132,7 @@ pub fn multi_step_form_one() -> Html {
             if let Some(input) = input {
                 let value = input.value();
                 input_gender_handle.set(value);
-                gender_valid_handle.set(validate_input(&input.value()));
-            }
-        })
-    };
-
-    let on_username_change = {
-        let input_username_ref = input_username_ref.clone();
-
-        Callback::from(move |_| {
-            let input = input_username_ref.cast::<HtmlInputElement>();
-
-            if let Some(input) = input {
-                let value = input.value();
-                input_username_handle.set(value);
-                username_valid_handle.set(validate_input(&input.value()));
-            }
-        })
-    };
-
-    let on_password_change = {
-        let input_password_ref = input_password_ref.clone();
-
-        Callback::from(move |_| {
-            let input = input_password_ref.cast::<HtmlInputElement>();
-
-            if let Some(input) = input {
-                let value = input.value();
-                input_password_handle.set(value);
-                password_valid_handle.set(validate_input(&input.value()));
+                gender_valid_handle.set(validate_input(input.value()));
             }
         })
     };
@@ -311,80 +210,88 @@ pub fn multi_step_form_one() -> Html {
         0 => html! {
             <div class="page ml-0 transition-transform duration-300">
                 <div class="title text-left text-xl font-semibold mb-4">{"Personal Information"}</div>
-                <div class="field mb-6">
-                    <div class="label font-semibold text-pink-800">{"Full Name"}</div>
-                    <input
-                      id="full-name"
-                      class="w-full border border-pink-800 rounded px-4 py-2"
-                      type="text"
-                      name="full-name"
-                      placeholder="Full Name"
-                      aria-required="true"
+                    <CustomInput
+                      input_type={Some("text".to_string())}
+                      label={"Full Name".to_string()}
+                      input_handle={input_full_name_handle}
+                      name={"full-name".to_string()}
+                      input_ref={input_full_name_ref}
+                      input_placeholder={"Full Name".to_string()}
+                      icon_class={"".to_string()}
+                      icon={"".to_string()}
+                      error_message={"Full name can't be blank!".to_string()}
+                      form_input_class={"field mb-6".to_string()}
+                      form_input_field_class={"validate-input mb-6".to_string()}
+                      form_input_label_class={"label font-semibold text-pink-800".to_string()}
+                      form_input_input_class={"w-full border border-pink-800 rounded px-4 py-2".to_string()}
+                      form_input_error_class={"text-red-500 text-sm my-2".to_string()}
                       required={true}
-                      ref={input_full_name_ref}
-                      oninput={on_full_name_change}
+                      input_valid_handle={full_name_valid_handle}
+                      validate_function={validate_input}
                     />
-                </div>
-                if !full_name_valid {
-                   <div class="error-txt text-red-500 text-sm my-2">{"Full name can't be blank!"}</div>
-                }
-                <div class="field mb-6">
-                    <div class="label font-semibold text-pink-800">{"Email Address"}</div>
-                    <input
-                      id="email"
-                      class="w-full border border-pink-800 rounded px-4 py-2"
-                      type="email"
-                      name="email"
-                      placeholder="Email"
-                      aria-required="true"
+                    <CustomInput
+                      input_type={Some("text".to_string())}
+                      label={"Email".to_string()}
+                      input_handle={input_email_handle}
+                      name={"email".to_string()}
+                      input_ref={input_email_ref}
+                      input_placeholder={"Email".to_string()}
+                      icon_class={"".to_string()}
+                      icon={"".to_string()}
+                      error_message={"Enter a valid email address!".to_string()}
+                      form_input_class={"field mb-6".to_string()}
+                      form_input_field_class={"validate-input mb-6".to_string()}
+                      form_input_label_class={"label font-semibold text-pink-800".to_string()}
+                      form_input_input_class={"w-full border border-pink-800 rounded px-4 py-2".to_string()}
+                      form_input_error_class={"text-red-500 text-sm my-2".to_string()}
                       required={true}
-                      ref={input_email_ref}
-                      oninput={on_email_change}
+                      input_valid_handle={email_valid_handle}
+                      validate_function={validate_email}
                     />
-                </div>
-                if !email_valid {
-                    <div class="error-txt text-red-500 text-sm my-2">{"Enter a valid email address"}</div>
-                }
                 <button class="next bg-purple-800 hover:bg-purple-700 text-white rounded px-4 mt-10 py-2 w-full font-semibold mb-4" onclick={on_next}>{ "Next" }</button>
             </div>
         },
         1 => html! {
             <div class="page transition-transform duration-300">
                 <div class="title text-left text-xl font-semibold mb-4">{"Contact Details"}</div>
-                <div class="field mb-6">
-                    <div class="label font-semibold text-pink-800">{"Phone Number"}</div>
-                    <input
-                      id="phone-number"
-                      class="w-full border border-pink-800 rounded px-4 py-2"
-                      type="tel"
-                      name="phone-number"
-                      placeholder="Phone Number"
-                      aria-required="true"
+                    <CustomInput
+                      input_type={Some("text".to_string())}
+                      label={"Phone Number".to_string()}
+                      input_handle={input_phone_number_handle}
+                      name={"phone-number".to_string()}
+                      input_ref={input_phone_number_ref}
+                      input_placeholder={"Phone Number".to_string()}
+                      icon_class={"".to_string()}
+                      icon={"".to_string()}
+                      error_message={"Phone number can't be blank!".to_string()}
+                      form_input_class={"field mb-6".to_string()}
+                      form_input_field_class={"validate-input mb-6".to_string()}
+                      form_input_label_class={"label font-semibold text-pink-800".to_string()}
+                      form_input_input_class={"w-full border border-pink-800 rounded px-4 py-2".to_string()}
+                      form_input_error_class={"text-red-500 text-sm my-2".to_string()}
                       required={true}
-                      ref={input_phone_number_ref}
-                      oninput={on_phone_number_change}
+                      input_valid_handle={phone_number_valid_handle}
+                      validate_function={validate_input}
                     />
-                </div>
-                if !phone_number_valid {
-                   <div class="error-txt text-red-500 text-sm my-2">{"Phone number can't be blank!"}</div>
-                }
-                <div class="field mb-6">
-                    <div class="label font-semibold text-pink-800">{"Address"}</div>
-                    <input
-                      id="address"
-                      class="w-full border border-pink-800 rounded px-4 py-2"
-                      type="text"
-                      name="address"
-                      placeholder="Address"
-                      aria-required="true"
+                    <CustomInput
+                      input_type={Some("text".to_string())}
+                      label={"Address".to_string()}
+                      input_handle={input_address_handle}
+                      name={"address".to_string()}
+                      input_ref={input_address_ref}
+                      input_placeholder={"Address".to_string()}
+                      icon_class={"".to_string()}
+                      icon={"".to_string()}
+                      error_message={"Address can't be blank!".to_string()}
+                      form_input_class={"field mb-6".to_string()}
+                      form_input_field_class={"validate-input mb-6".to_string()}
+                      form_input_label_class={"label font-semibold text-pink-800".to_string()}
+                      form_input_input_class={"w-full border border-pink-800 rounded px-4 py-2".to_string()}
+                      form_input_error_class={"text-red-500 text-sm my-2".to_string()}
                       required={true}
-                      ref={input_address_ref}
-                      oninput={on_address_change}
+                      input_valid_handle={address_valid_handle}
+                      validate_function={validate_input}
                     />
-                </div>
-                if !address_valid {
-                   <div class="error-txt text-red-500 text-sm my-2">{"Address can't be blank!"}</div>
-                }
                 <div class="field btns text-center space-x-5 mt-10">
                     <button class="prev bg-pink-800 hover:bg-pink-700 text-white rounded px-4 py-2 font-semibold" onclick={on_previous}>{ "Previous" }</button>
                     <button class="next bg-purple-800 hover:bg-purple-700 text-white rounded px-4 py-2 font-semibold" onclick={on_next}>{ "Next" }</button>
@@ -394,23 +301,25 @@ pub fn multi_step_form_one() -> Html {
         2 => html! {
             <div class="page transition-transform duration-300">
                 <div class="title text-left text-xl font-semibold mb-4">{"Date of Birth"}</div>
-                <div class="field mb-6">
-                    <div class="label font-semibold text-pink-800">{"Date of Birth"}</div>
-                    <input
-                      id="birthday"
-                      class="w-full border border-pink-800 rounded px-4 py-2"
-                      type="date"
-                      name="birthday"
-                      placeholder="Birthday"
-                      aria-required="true"
+                    <CustomInput
+                      input_type={Some("date".to_string())}
+                      label={"Date of Birth".to_string()}
+                      input_handle={input_birthday_handle}
+                      name={"birthday".to_string()}
+                      input_ref={input_birthday_ref}
+                      input_placeholder={"Birthday".to_string()}
+                      icon_class={"".to_string()}
+                      icon={"".to_string()}
+                      error_message={"Birthday can't be blank!".to_string()}
+                      form_input_class={"field mb-6".to_string()}
+                      form_input_field_class={"validate-input mb-6".to_string()}
+                      form_input_label_class={"label font-semibold text-pink-800".to_string()}
+                      form_input_input_class={"w-full border border-pink-800 rounded px-4 py-2".to_string()}
+                      form_input_error_class={"text-red-500 text-sm my-2".to_string()}
                       required={true}
-                      ref={input_birthday_ref}
-                      oninput={on_birthday_change}
+                      input_valid_handle={birthday_valid_handle}
+                      validate_function={validate_input}
                     />
-                </div>
-                if !birthday_valid {
-                   <div class="error-txt text-red-500 text-sm my-2">{"Birthday can't be blank!"}</div>
-                }
                 <div class="field mb-6">
                     <div class="label font-semibold text-pink-800">{"Gender"}</div>
                     <select
@@ -441,40 +350,44 @@ pub fn multi_step_form_one() -> Html {
         3 => html! {
               <div class="page transition-transform duration-300">
                   <div class="title text-left text-xl font-semibold mb-4">{"Account Details"}</div>
-                  <div class="field mb-4">
-                      <div class="label font-semibold text-pink-800">{"Username"}</div>
-                      <input
-                        id="username"
-                        class="border border-pink-800 rounded px-3 py-2 w-full"
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        aria-required="true"
-                        required={true}
-                        ref={input_username_ref}
-                        oninput={on_username_change}
-                      />
-                  </div>
-                  if !username_valid {
-                     <div class="error-txt text-red-500 text-sm my-2">{"Username can't be blank!"}</div>
-                  }
-                  <div class="field mb-4">
-                      <div class="label font-semibold text-pink-800">{"Password"}</div>
-                      <input
-                        id="password"
-                        class="border border-pink-800 rounded px-3 py-2 w-full"
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        aria-required="true"
-                        required={true}
-                        ref={input_password_ref}
-                        oninput={on_password_change}
-                      />
-                  </div>
-                  if !password_valid {
-                     <div class="error-txt text-red-500 text-sm my-2">{"Password can't be blank!"}</div>
-                  }
+                    <CustomInput
+                      input_type={Some("text".to_string())}
+                      label={"Username".to_string()}
+                      input_handle={input_username_handle}
+                      name={"username".to_string()}
+                      input_ref={input_username_ref}
+                      input_placeholder={"Username".to_string()}
+                      icon_class={"".to_string()}
+                      icon={"".to_string()}
+                      error_message={"Username can't be blank!".to_string()}
+                      form_input_class={"field mb-6".to_string()}
+                      form_input_field_class={"validate-input mb-6".to_string()}
+                      form_input_label_class={"label font-semibold text-pink-800".to_string()}
+                      form_input_input_class={"w-full border border-pink-800 rounded px-4 py-2".to_string()}
+                      form_input_error_class={"text-red-500 text-sm my-2".to_string()}
+                      required={true}
+                      input_valid_handle={username_valid_handle}
+                      validate_function={validate_input}
+                    />
+                    <CustomInput
+                      input_type={Some("password".to_string())}
+                      label={"Password".to_string()}
+                      input_handle={input_password_handle}
+                      name={"password".to_string()}
+                      input_ref={input_password_ref}
+                      input_placeholder={"Password".to_string()}
+                      icon_class={"".to_string()}
+                      icon={"".to_string()}
+                      error_message={"Password can't be blank!".to_string()}
+                      form_input_class={"field mb-6".to_string()}
+                      form_input_field_class={"validate-input mb-6".to_string()}
+                      form_input_label_class={"label font-semibold text-pink-800".to_string()}
+                      form_input_input_class={"w-full border border-pink-800 rounded px-4 py-2".to_string()}
+                      form_input_error_class={"text-red-500 text-sm my-2".to_string()}
+                      required={true}
+                      input_valid_handle={password_valid_handle}
+                      validate_function={validate_input}
+                    />
                   <div class="field btns text-center space-x-5 mt-10">
                       <button class="prev bg-pink-800 hover:bg-pink-700 text-white rounded px-4 py-2 font-semibold" onclick={on_previous}>{ "Previous" }</button>
                       <button class="submit bg-purple-800 hover:bg-purple-700 text-white rounded px-4 py-2 font-semibold">{ "Submit" }</button>
