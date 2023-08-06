@@ -432,6 +432,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "input_yew"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e3c952d2f72efc663d96eecc11ee6e76e1af0968cb888ac128df52c358f2fb90"
+dependencies = [
+ "web-sys",
+ "yew",
+]
+
+[[package]]
 name = "itoa"
 version = "1.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -956,6 +966,7 @@ dependencies = [
 name = "yew-components"
 version = "0.1.0"
 dependencies = [
+ "input_yew",
  "regex",
  "reqwasm",
  "serde",
