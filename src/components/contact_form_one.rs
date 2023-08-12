@@ -107,17 +107,13 @@ pub fn contact_form_one() -> Html {
                   {"Contact US"}
                 </span>
                 <CustomInput
-                  input_type={Some("text".to_string())}
-                  label={"".to_string()}
+                  input_type={"text".to_string()}
                   input_handle={input_name_handle}
                   name={"name".to_string()}
                   input_ref={input_name_ref}
                   input_placeholder={"Your Name".to_string()}
-                  icon_class={"".to_string()}
                   error_message={"Name can't be blank".to_string()}
-                  form_input_class={"".to_string()}
                   form_input_field_class={"wrap-input1 validate-input mb-6".to_string()}
-                  form_input_label_class={"".to_string()}
                   form_input_input_class={"w-full bg-gray-200 focus:bg-white border border-transparent rounded-lg px-4 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900".to_string()}
                   form_input_error_class={"text-red-500 text-sm mb-2".to_string()}
                   required={true}
@@ -125,17 +121,13 @@ pub fn contact_form_one() -> Html {
                   validate_function={validate_input}
                 />
                 <CustomInput
-                  input_type={Some("text".to_string())}
-                  label={"".to_string()}
+                  input_type={"text".to_string()}
                   input_handle={input_email_handle}
                   name={"email".to_string()}
                   input_ref={input_email_ref}
                   input_placeholder={"Your Email".to_string()}
-                  icon_class={"".to_string()}
                   error_message={"Enter a valid email address".to_string()}
-                  form_input_class={"".to_string()}
                   form_input_field_class={"wrap-input1 validate-input mb-6".to_string()}
-                  form_input_label_class={"".to_string()}
                   form_input_input_class={"w-full bg-gray-200 focus:bg-white border border-transparent rounded-lg px-4 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900".to_string()}
                   form_input_error_class={"text-red-500 text-sm mb-2".to_string()}
                   required={true}
@@ -143,17 +135,13 @@ pub fn contact_form_one() -> Html {
                   validate_function={validate_email}
                 />
                 <CustomInput
-                  input_type={Some("text".to_string())}
-                  label={"".to_string()}
+                  input_type={"text".to_string()}
                   input_handle={input_subject_handle}
                   name={"subject".to_string()}
                   input_ref={input_subject_ref}
                   input_placeholder={"Your Subject".to_string()}
-                  icon_class={"".to_string()}
                   error_message={"Subject can't be blank".to_string()}
-                  form_input_class={"".to_string()}
                   form_input_field_class={"wrap-input1 validate-input mb-6".to_string()}
-                  form_input_label_class={"".to_string()}
                   form_input_input_class={"w-full bg-gray-200 focus:bg-white border border-transparent rounded-lg px-4 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900".to_string()}
                   form_input_error_class={"text-red-500 text-sm mb-2".to_string()}
                   required={true}
@@ -161,17 +149,13 @@ pub fn contact_form_one() -> Html {
                   validate_function={validate_input}
                 />
                 <CustomInput
-                  input_type={Some("textarea".to_string())}
-                  label={"".to_string()}
+                  input_type={"textarea".to_string()}
                   input_handle={input_message_handle}
                   name={"message".to_string()}
                   input_ref={input_message_ref}
                   input_placeholder={"Your Message".to_string()}
-                  icon_class={"".to_string()}
                   error_message={"Message can't be blank".to_string()}
-                  form_input_class={"".to_string()}
                   form_input_field_class={"wrap-input1 validate-input mb-6".to_string()}
-                  form_input_label_class={"".to_string()}
                   form_input_input_class={"w-full bg-gray-200 focus:bg-white border border-transparent rounded-lg px-4 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900".to_string()}
                   form_input_error_class={"text-red-500 text-sm mb-2".to_string()}
                   required={true}

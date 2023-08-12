@@ -202,13 +202,12 @@ pub fn multi_step_form_one() -> Html {
             <div class="page ml-0 transition-transform duration-300">
                 <div class="title text-left text-xl font-semibold mb-4">{"Personal Information"}</div>
                     <CustomInput
-                      input_type={Some("text".to_string())}
+                      input_type={"text".to_string()}
                       label={"Full Name".to_string()}
                       input_handle={input_full_name_handle}
                       name={"full-name".to_string()}
                       input_ref={input_full_name_ref}
                       input_placeholder={"Full Name".to_string()}
-                      icon_class={"".to_string()}
                       error_message={"Full name can't be blank!".to_string()}
                       form_input_class={"field mb-6".to_string()}
                       form_input_field_class={"validate-input mb-6".to_string()}
@@ -220,13 +219,12 @@ pub fn multi_step_form_one() -> Html {
                       validate_function={validate_input}
                     />
                     <CustomInput
-                      input_type={Some("text".to_string())}
+                      input_type={"text".to_string()}
                       label={"Email".to_string()}
                       input_handle={input_email_handle}
                       name={"email".to_string()}
                       input_ref={input_email_ref}
                       input_placeholder={"Email".to_string()}
-                      icon_class={"".to_string()}
                       error_message={"Enter a valid email address!".to_string()}
                       form_input_class={"field mb-6".to_string()}
                       form_input_field_class={"validate-input mb-6".to_string()}
@@ -244,16 +242,15 @@ pub fn multi_step_form_one() -> Html {
             <div class="page transition-transform duration-300">
                 <div class="title text-left text-xl font-semibold mb-4">{"Contact Details"}</div>
                     <CustomInput
-                      input_type={Some("text".to_string())}
+                      input_type={"tel".to_string()}
                       label={"Phone Number".to_string()}
                       input_handle={input_phone_number_handle}
                       name={"phone-number".to_string()}
                       input_ref={input_phone_number_ref}
-                      input_placeholder={"Phone Number".to_string()}
-                      icon_class={"".to_string()}
+                      input_placeholder={"+19999".to_string()}
                       error_message={"Phone number can't be blank!".to_string()}
                       form_input_class={"field mb-6".to_string()}
-                      form_input_field_class={"validate-input mb-6".to_string()}
+                      form_input_field_class={"flex telephone-input validate-input mb-6".to_string()}
                       form_input_label_class={"label font-semibold text-pink-800".to_string()}
                       form_input_input_class={"w-full border border-pink-800 rounded px-4 py-2".to_string()}
                       form_input_error_class={"text-red-500 text-sm my-2".to_string()}
@@ -262,13 +259,12 @@ pub fn multi_step_form_one() -> Html {
                       validate_function={validate_input}
                     />
                     <CustomInput
-                      input_type={Some("text".to_string())}
+                      input_type={"text".to_string()}
                       label={"Address".to_string()}
                       input_handle={input_address_handle}
                       name={"address".to_string()}
                       input_ref={input_address_ref}
                       input_placeholder={"Address".to_string()}
-                      icon_class={"".to_string()}
                       error_message={"Address can't be blank!".to_string()}
                       form_input_class={"field mb-6".to_string()}
                       form_input_field_class={"validate-input mb-6".to_string()}
@@ -289,13 +285,12 @@ pub fn multi_step_form_one() -> Html {
             <div class="page transition-transform duration-300">
                 <div class="title text-left text-xl font-semibold mb-4">{"Date of Birth"}</div>
                     <CustomInput
-                      input_type={Some("date".to_string())}
+                      input_type={"date".to_string()}
                       label={"Date of Birth".to_string()}
                       input_handle={input_birthday_handle}
                       name={"birthday".to_string()}
                       input_ref={input_birthday_ref}
                       input_placeholder={"Birthday".to_string()}
-                      icon_class={"".to_string()}
                       error_message={"Birthday can't be blank!".to_string()}
                       form_input_class={"field mb-6".to_string()}
                       form_input_field_class={"validate-input mb-6".to_string()}
@@ -337,13 +332,12 @@ pub fn multi_step_form_one() -> Html {
               <div class="page transition-transform duration-300">
                   <div class="title text-left text-xl font-semibold mb-4">{"Account Details"}</div>
                     <CustomInput
-                      input_type={Some("text".to_string())}
+                      input_type={"text".to_string()}
                       label={"Username".to_string()}
                       input_handle={input_username_handle}
                       name={"username".to_string()}
                       input_ref={input_username_ref}
                       input_placeholder={"Username".to_string()}
-                      icon_class={"".to_string()}
                       error_message={"Username can't be blank!".to_string()}
                       form_input_class={"field mb-6".to_string()}
                       form_input_field_class={"validate-input mb-6".to_string()}
@@ -355,13 +349,12 @@ pub fn multi_step_form_one() -> Html {
                       validate_function={validate_input}
                     />
                     <CustomInput
-                      input_type={Some("password".to_string())}
+                      input_type={"password".to_string()}
                       label={"Password".to_string()}
                       input_handle={input_password_handle}
                       name={"password".to_string()}
                       input_ref={input_password_ref}
                       input_placeholder={"Password".to_string()}
-                      icon_class={"".to_string()}
                       error_message={"Password can't be blank!".to_string()}
                       form_input_class={"field mb-6".to_string()}
                       form_input_field_class={"validate-input mb-6".to_string()}

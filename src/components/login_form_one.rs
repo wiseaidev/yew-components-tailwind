@@ -70,7 +70,7 @@ pub fn login_form_one() -> Html {
               }
               <span class="text-4xl text-gray-800 pb-6">{"Login"}</span>
               <CustomInput
-                input_type={Some("text".to_string())}
+                input_type={"text".to_string()}
                 label={"Email".to_string()}
                 input_handle={input_email_handle}
                 name={"username".to_string()}
@@ -78,9 +78,7 @@ pub fn login_form_one() -> Html {
                 input_placeholder={"Your Email".to_string()}
                 icon_class={"text-2xl fa fa-person text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2".to_string()}
                 error_message={"Enter a valid email address!".to_string()}
-                form_input_class={"".to_string()}
                 form_input_field_class={"relative".to_string()}
-                form_input_label_class={"".to_string()}
                 form_input_input_class={"input w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-100 pl-12".to_string()}
                 form_input_error_class={"text-red-500 absolute text-sm mb-2".to_string()}
                 required={true}
@@ -88,7 +86,7 @@ pub fn login_form_one() -> Html {
                 validate_function={validate_email}
               />
               <CustomInput
-                input_type={Some("password".to_string())}
+                input_type={"password".to_string()}
                 label={"Password".to_string()}
                 input_handle={input_password_handle}
                 name={"password".to_string()}
@@ -96,9 +94,7 @@ pub fn login_form_one() -> Html {
                 input_placeholder={"Password".to_string()}
                 icon_class={"text-2xl fa fa-lock text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2".to_string()}
                 error_message={"Password can't be blank!".to_string()}
-                form_input_class={"".to_string()}
                 form_input_field_class={"relative mt-2 mb-2".to_string()}
-                form_input_label_class={"".to_string()}
                 form_input_input_class={"input w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-100 pl-12".to_string()}
                 form_input_error_class={"text-red-500 absolute text-sm".to_string()}
                 required={true}
