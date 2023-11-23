@@ -1,9 +1,9 @@
-use wasm_bindgen_futures::spawn_local;
-use web_sys::{console, HtmlInputElement, Window};
 use crate::components::common::{validate_email, validate_input, LoginUserSchema};
 use input_yew::CustomInput;
-use yew::prelude::*;
 use regex::Regex;
+use wasm_bindgen_futures::spawn_local;
+use web_sys::{console, HtmlInputElement, Window};
+use yew::prelude::*;
 
 use crate::api::auth::login_user;
 
@@ -39,25 +39,23 @@ pub fn login_form_one() -> Html {
             let password_val = password_ref.clone();
             let error_handle = error_handle.clone();
             if email_valid && password_valid {
-              let response = login_user(email_val, password_val).await;
-              match response {
-                  Ok(_) => {
-                      console::log_1(&"success".into());
-                      let window: Window = web_sys::window().expect("window not available");
-                      let location = window.location();
-                      let _ = location.set_href("/error");
-                  }
-                  Err(err) => {
-                      error_handle.set(err);
-                  }
-              }
-            }
-            else {
-              error_handle.set("Please provide a valid email and password!".into());
+                let response = login_user(email_val, password_val).await;
+                match response {
+                    Ok(_) => {
+                        console::log_1(&"success".into());
+                        let window: Window = web_sys::window().expect("window not available");
+                        let location = window.location();
+                        let _ = location.set_href("/error");
+                    }
+                    Err(err) => {
+                        error_handle.set(err);
+                    }
+                }
+            } else {
+                error_handle.set("Please provide a valid email and password!".into());
             }
         });
     });
-
 
     html! {
         <div
