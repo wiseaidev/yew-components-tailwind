@@ -1,8 +1,8 @@
+use regex::Regex;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen_futures::spawn_local;
 use web_sys::{console, HtmlInputElement, Window};
 use yew::prelude::*;
-use regex::Regex;
 
 use crate::api::auth::login_user;
 
@@ -85,21 +85,20 @@ pub fn login_form_three() -> Html {
             let password_val = password_ref.clone();
             let error_handle = error_handle.clone();
             if email_valid && password_valid {
-              let response = login_user(email_val, password_val).await;
-              match response {
-                  Ok(_) => {
-                      console::log_1(&"success".into());
-                      let window: Window = web_sys::window().expect("window not available");
-                      let location = window.location();
-                      let _ = location.set_href("/error");
-                  }
-                  Err(err) => {
-                      error_handle.set(err);
-                  }
-              }
-            }
-            else {
-              error_handle.set("Please provide a valid email and password!".into());
+                let response = login_user(email_val, password_val).await;
+                match response {
+                    Ok(_) => {
+                        console::log_1(&"success".into());
+                        let window: Window = web_sys::window().expect("window not available");
+                        let location = window.location();
+                        let _ = location.set_href("/error");
+                    }
+                    Err(err) => {
+                        error_handle.set(err);
+                    }
+                }
+            } else {
+                error_handle.set("Please provide a valid email and password!".into());
             }
         });
     });
@@ -108,8 +107,7 @@ pub fn login_form_three() -> Html {
         Callback::from(move |_| {
             if eye_active {
                 password_type_handle.set("password".into())
-            }
-            else {
+            } else {
                 password_type_handle.set("text".into())
             }
             eye_active_handle.set(!eye_active);

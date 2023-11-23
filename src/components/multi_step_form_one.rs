@@ -1,6 +1,6 @@
-use web_sys::HtmlInputElement;
-use input_yew::CustomInput;
 use crate::components::common::{validate_email, validate_input};
+use input_yew::CustomInput;
+use web_sys::HtmlInputElement;
 use yew::prelude::*;
 
 #[function_component(MultiStepFormOne)]
@@ -69,40 +69,37 @@ pub fn multi_step_form_one() -> Html {
     let on_next = {
         let error_handle = error_handle.clone();
         let counter = current_step_handle.clone();
-        move |_| {
-            match *counter {
-                0 => {
-                  if full_name_valid && email_valid {
-                        let value = *counter + 1;
-                        counter.set(value);
-                        error_handle.set("".to_string());
-                  }
-                  else {
-                        error_handle.set("Please provide a valid full name and email address!".to_string());
-                  }
-                },
-                1 => {
-                  if phone_number_valid && address_valid {
-                        let value = *counter + 1;
-                        counter.set(value);
-                        error_handle.set("".to_string());
-                  }
-                  else {
-                        error_handle.set("Please provide a valid phone number and address!".to_string());
-                  }
-                },
-                2 => {
-                  if birthday_valid && gender_valid {
-                        let value = *counter + 1;
-                        counter.set(value);
-                        error_handle.set("".to_string());
-                  }
-                  else {
-                        error_handle.set("Please provide a valid birth date and gender!".to_string());
-                  }
-                },
-                _ => println!("Ain't special"),
+        move |_| match *counter {
+            0 => {
+                if full_name_valid && email_valid {
+                    let value = *counter + 1;
+                    counter.set(value);
+                    error_handle.set("".to_string());
+                } else {
+                    error_handle
+                        .set("Please provide a valid full name and email address!".to_string());
+                }
             }
+            1 => {
+                if phone_number_valid && address_valid {
+                    let value = *counter + 1;
+                    counter.set(value);
+                    error_handle.set("".to_string());
+                } else {
+                    error_handle
+                        .set("Please provide a valid phone number and address!".to_string());
+                }
+            }
+            2 => {
+                if birthday_valid && gender_valid {
+                    let value = *counter + 1;
+                    counter.set(value);
+                    error_handle.set("".to_string());
+                } else {
+                    error_handle.set("Please provide a valid birth date and gender!".to_string());
+                }
+            }
+            _ => println!("Ain't special"),
         }
     };
 

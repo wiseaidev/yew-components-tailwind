@@ -6,7 +6,7 @@
 @tailwind variants;
 
 .telephone-input select {
-  max-width: 35px;
+  max-width: 55px;
   font-size: 14px;
   padding: 10px;
 }

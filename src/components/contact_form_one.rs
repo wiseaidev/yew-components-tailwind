@@ -1,13 +1,11 @@
+use crate::components::common::{validate_email, validate_input, LoginUserSchema};
+use input_yew::CustomInput;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen_futures::spawn_local;
 use web_sys::{console, HtmlInputElement, Window};
-use crate::components::common::{validate_email, validate_input, LoginUserSchema};
-use input_yew::CustomInput;
 use yew::prelude::*;
-use regex::Regex;
 
 use crate::api::auth::login_user;
-
 
 #[function_component(ContactFormOne)]
 pub fn contact_form_one() -> Html {
@@ -40,7 +38,7 @@ pub fn contact_form_one() -> Html {
 
     let input_message_ref = use_node_ref();
     let input_message_handle = use_state(String::default);
-    let input_message= (*input_message_handle).clone();
+    let input_message = (*input_message_handle).clone();
 
     let onsubmit = Callback::from(move |event: SubmitEvent| {
         event.prevent_default();
@@ -50,7 +48,13 @@ pub fn contact_form_one() -> Html {
         let subject_ref = input_subject.clone();
         let message_ref = input_message.clone();
         let error_handle = error_handle.clone();
-        console::log_1(&format!("Email: {}, Name: {}, Subject: {}, Message: {}", input_email, input_name, input_subject, input_message).into());
+        console::log_1(
+            &format!(
+                "Email: {}, Name: {}, Subject: {}, Message: {}",
+                input_email, input_name, input_subject, input_message
+            )
+            .into(),
+        );
 
         spawn_local(async move {
             let email_val = email_ref.clone();
@@ -60,22 +64,21 @@ pub fn contact_form_one() -> Html {
 
             let error_handle = error_handle.clone();
             if email_valid && name_valid && subject_valid && message_valid {
-              // TODO: create a contact us endpoint
-              let response = login_user(email_val, subject_val).await;
-              match response {
-                  Ok(_) => {
-                      console::log_1(&"success".into());
-                      let window: Window = web_sys::window().expect("window not available");
-                      let location = window.location();
-                      let _ = location.set_href("/home");
-                  }
-                  Err(err) => {
-                      error_handle.set(err);
-                  }
-              }
-            }
-            else {
-              error_handle.set("Please provide valid contact information!".into());
+                // TODO: create a contact us endpoint
+                let response = login_user(email_val, subject_val).await;
+                match response {
+                    Ok(_) => {
+                        console::log_1(&"success".into());
+                        let window: Window = web_sys::window().expect("window not available");
+                        let location = window.location();
+                        let _ = location.set_href("/home");
+                    }
+                    Err(err) => {
+                        error_handle.set(err);
+                    }
+                }
+            } else {
+                error_handle.set("Please provide valid contact information!".into());
             }
         });
     });

@@ -1,11 +1,11 @@
 use yew::prelude::*;
 use yew_router::prelude::*;
 
+use crate::pages::contact_page_one::ContactPageOne;
 use crate::pages::error::Error;
 use crate::pages::login_page_one::LoginPageOne;
-use crate::pages::login_page_two::LoginPageTwo;
 use crate::pages::login_page_three::LoginPageThree;
-use crate::pages::contact_page_one::ContactPageOne;
+use crate::pages::login_page_two::LoginPageTwo;
 use crate::pages::multi_step_page_one::MultiStepPageOne;
 
 #[derive(Clone, Routable, PartialEq)]
@@ -21,7 +21,7 @@ pub enum Route {
     #[at("/contact/1")]
     ContactPageOne,
     #[at("/multi-step/1")]
-    MultiStepPageOne
+    MultiStepPageOne,
 }
 
 pub fn switch(routes: Route) -> Html {
